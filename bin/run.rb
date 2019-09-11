@@ -18,16 +18,32 @@ gets.chomp
           puts `clear`
           puts "What's your password"
           password = gets.chomp
+          puts `clear`
+          until !User.names.include?(name)
+              puts "that name exist. please give another name. try something fun!"
+              name = gets.chomp
+              puts `clear`
+              puts "What's your password"
+              password = gets.chomp
+              puts `clear`    
+              end
           this_user = User.create(name: name, password: password)
-      else
+
+        else
           puts `clear`
           puts "You must be a returning user. What is your name?"
           name = gets.chomp
           puts `clear`
           puts "What's your password"
           password = gets.chomp 
+          
+          until User.passwords.include?(password)
+            puts "I think you may have entered the wrong password. Please enter your password again."
+            password = gets.chomp
+          end
+          
           this_user = User.find_by(name: name, password: password)
-      end
+        end
 
       #game introduction    
       puts `clear`

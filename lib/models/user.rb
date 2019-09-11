@@ -32,5 +32,10 @@ class User < ActiveRecord::Base
         puts "Your account is deleted. :)"
     end
 
+    def self.names
+        self.all.map do |user|
+            user.name
+        end
+    end
          
 end
