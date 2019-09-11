@@ -11,12 +11,13 @@ class User < ActiveRecord::Base
             result.won
         end
             
-        array2 = array.select do |won|
-        won == 1
+        array2 = array.select do |result|
+        # binding.pr
+        result == true
         end
         
-        array3 = array.reject do |loss|
-        loss == 1
+        array3 = array.select do |result|
+        result != true
         end
         
         # add all of my results wins and losses together 
