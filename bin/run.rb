@@ -37,18 +37,13 @@ gets.chomp
           puts "What's your password"
           password = gets.chomp 
           
-          until User.passwords.include?(password)
-            puts "I think you may have entered the wrong password. Please enter your password again."
-            password = gets.chomp
-          end
-          
           this_user = User.find_by(name: name, password: password)
         end
 
       #game introduction    
       puts `clear`
       puts "Do you want to play a game? (yes/no)"
-      " Right now we have coin toss."
+      puts "Right now we have coin toss."
       response = gets.chomp
             if response == "yes"
                   result = GameType.play("coin toss")
