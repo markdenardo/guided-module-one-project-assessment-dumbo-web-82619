@@ -2,7 +2,7 @@
 #the following is an example of a shortened string require relative path
 require_relative '../config/environment'
 
-#home page outputs 3 messages then uses a gets chomp to advance to the next line
+#home page clears the screen using puts 'clear', outputs 3 messages then uses a gets chomp to advance to the next line via user input
 puts `clear`
 puts "COIN TOSS"
 puts "press enter to start"
@@ -26,7 +26,9 @@ gets.chomp
           
           #until loop sets the conditions of the gets.chomp; User.names.include?(name) checks to see if the name of the new user matches any existing user in the database.
           #It will only end the loop when the User enters a :name which is not in development.rb
+          #uses the User.name() method from the edge class of User to query if the name exits using the .include? method from Ruby
           until !User.names.include?(name)
+          
           #a re-prompt, asking for a unique username. If the user doesn't give a unique username this loop will not end
           puts "that name exist. please give another name. try something fun!"
           name = gets.chomp
@@ -46,7 +48,8 @@ gets.chomp
       puts `clear`
       puts "What's your password"
       password = gets.chomp 
-      #Assigns the ActiveRecord method find_by to a variable name (this user). The name and password originate in the User class,
+      #Assigns the ActiveRecord method find_by to a variable name (this user). The name and password originate in the User class
+      #this mirrors the data seeded to the database
       this_user = User.find_by(name: name, password: password)
     end
 
@@ -56,24 +59,34 @@ gets.chomp
       puts "Right now we have coin toss."
       response = gets.chomp
             if response == "yes"
-                  #this method is a 
+                  #evocation of the GameType.play() method which is declared in the GameType class which returns the conditional result of coin toss
+                  #this code is on line 9 of GameType.class
                   result = GameType.play("coin toss")
-          
+
+                  #this is the game logic and UI of coin toss  
                   puts `clear`  
                   puts  "Ok. I just flipped the coin. Heads or Tails?"
                   response = gets.chomp
+                      #in this example, I decided to make the value of true the value of heads and the false of false the value of tails
+
+                      #this condition states if the user gets.chomp input is "Heads" and the GameType instance output is true that it is the same value in the game
                       if response == "Heads" && result == true
+                        #this Active Record method .create updates a new instance of the game result, tagging the user and the game to the result, and pushing it to the SQLite3 database development.db
                         Result.create(user_id: this_user.id,game_type_id: GameType.first.id,won: true)
                         puts "You guessed right!"
                       elsif
+                        #this condition states if the user gets.chomp input is "Tails" and the GameType instance output is false that it is the same value in the game
                         response == "Tails" && result == false
+                        #this Active Record method .create updates a new instance of the game result, tagging the user and the game to the result, and pushing it to the SQLite3 database development.db
                         Result.create(user_id: this_user.id,game_type_id: GameType.first.id,won: true)
                         puts "You guessed right!"
                       else
+                        #this Active Record method .create updates a new instance of the game result, tagging the user and the game to the result, and pushing it to the SQLite3 database development.db
                         Result.create(user_id: this_user.id,game_type_id: GameType.first.id,won: false)
                         puts "Sorry, wrong guess! :("
                       end  
-                    sleep(3)
+                      #a wait command from Ruby which waits for 3 seconds in the argument
+                      sleep(3)
             else 
             end     
 
@@ -84,6 +97,7 @@ gets.chomp
               response = gets.chomp
                   if response == "yes"
                     puts "COIN TOSS stats: "
+                    #evocation of an class method User.stats()
                     User.stats(this_user.name)
                   else
                     puts `clear`
@@ -96,6 +110,8 @@ gets.chomp
                     response = gets.chomp
                     if response == "yes"
                       puts `clear`
+                      #evocation of the class method User.destroy_account() which uses an Active Record method to delete the account
+                      #this method DOES NOT delete the results data :(
                       User.destroy_account(this_user.name)
                     sleep(1)
                     end
