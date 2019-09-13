@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
         #example of map method iterating through the array of an instance of user's results and assigning it to a new array
         #array=user.results.map{|result|result.won} => [true, true, true, false]
         array = user.results.map do |result|
-            result.won
+        result.won
         end
         #example of select method reducing array to produce only the win results, which are designed to be true in this project
         #array2=array.select{|result|result==true} => [true, true, true]
@@ -37,13 +37,14 @@ class User < ActiveRecord::Base
     
     #uses the helper code from line 14, which should be refactored because OOP :), 
     #to find the user instance and destroys that user column using the ActiveRecord method .destroy
-    def self.destroy_account(name)
-        user = User.find_by(name: name)
-        user.destroy
-        puts "Your account is deleted. :)"
-    end
+    # def self.destroy_account(name)
+    #     user = User.find_by(name: name)
+    #     user.destroy
+    #     puts "Your account is deleted. :)"
+    # end
     
-    #a helper method used for run.rb which returns an array of all the user instances which are in the SQL database
+    
+    #a helper method used for run.rb which returns an array of all the user instances of :name which are in the SQL database
     def self.names
         self.all.map do |user|
             user.name

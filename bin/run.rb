@@ -28,7 +28,6 @@ gets.chomp
           #It will only end the loop when the User enters a :name which is not in development.rb
           #uses the User.name() method from the edge class of User to query if the name exits using the .include? method from Ruby
           until !User.names.include?(name)
-          
           #a re-prompt, asking for a unique username. If the user doesn't give a unique username this loop will not end
           puts "that name exist. please give another name. try something fun!"
           name = gets.chomp
@@ -48,9 +47,22 @@ gets.chomp
       puts `clear`
       puts "What's your password"
       password = gets.chomp 
+
       #Assigns the ActiveRecord method find_by to a variable name (this user). The name and password originate in the User class
       #this mirrors the data seeded to the database
       this_user = User.find_by(name: name, password: password)
+      puts "hmm. maybe you want to change your username. tomorrow is Halloween.(yes/no)"
+      response = gets.chomp
+      if response == "yes" 
+      puts `clear`
+      puts "Please enter a new username."
+      name = gets.chomp
+      this_user.update(name: name)
+      puts `clear`
+      puts "OK your new username is #{this_user.name}"
+      #insert Active 
+      sleep(2)
+      end
     end
 
       #game introduction    
@@ -112,7 +124,8 @@ gets.chomp
                       puts `clear`
                       #evocation of the class method User.destroy_account() which uses an Active Record method to delete the account
                       #this method DOES NOT delete the results data :(
-                      User.destroy_account(this_user.name)
+                      #User.destroy_account(this_user.name)
+                      this_user.destroy
                     sleep(1)
                     end
                     puts "🎶Goodbye🎶"
