@@ -14,5 +14,15 @@ class GameType < ActiveRecord::Base
         #[true, true, false].sample
     end
 
+    def self.user_to_game_type
+        puts "enter game name"
+        response = gets.chomp
+        this_game = GameType.find_by(name: response)
+        # binding.pry
+        x = this_game.users
+        puts x.name 
+       
+    end
+
 
 end

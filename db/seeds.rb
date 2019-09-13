@@ -39,5 +39,11 @@ Result.create(user_id: james.id,game_type_id: dance.id,won: true)
 Result.create(user_id: jane.id,game_type_id: coin_toss.id,won: false)
 Result.create(user_id: jane.id,game_type_id: coin_toss.id,won: false)
 #output explaining that SQLite3 has been seeded
+
+Result.create(user_id: rei.id,game_type_id: coin_toss.id,won: true)
+Result.create(user_id: rei.id,game_type_id: dungeon.id,won: true)
+Result.create(user_id: rei.id,game_type_id: dance.id,won: true)
+Result.create(user_id: rei.id,game_type_id: pingpong.id,won: true)
+
 puts "It has been seeded."
 

@@ -50,5 +50,10 @@ class User < ActiveRecord::Base
             user.name
         end
     end
+
+    def GameType.users
+
+    end
+
          
 end

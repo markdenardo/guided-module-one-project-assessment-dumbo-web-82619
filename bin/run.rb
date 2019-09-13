@@ -16,6 +16,7 @@ gets.chomp
     
     #this if /else conditional statement sets up the decision tree of creating a new User ID And Password
     if response == "yes"
+      
       puts `clear`
       puts "Great! What is your name?"
       name = gets.chomp
@@ -61,6 +62,7 @@ gets.chomp
       puts `clear`
       puts "OK your new username is #{this_user.name}"
       #insert Active 
+      
       sleep(2)
       end
     end
